@@ -2505,30 +2505,44 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 </script>
+<!-- Widget ElevenLabs -->
 <elevenlabs-convai agent-id="agent_3101k10r6qvne35tf899na2235tp"></elevenlabs-convai>
 <script src="https://unpkg.com/@elevenlabs/convai-widget-embed" async type="text/javascript"></script>
 <style>
   elevenlabs-convai {
     position: fixed !important;
-    bottom: 0 !important;
-    right: 0 !important;
-    margin: 0 !important;
+    bottom: 20px !important;
+    right: 20px !important;
     z-index: 9999 !important;
-    display: block;
-    opacity: 0.6;
-    transition: opacity 0.3s ease;
+    border-radius: 12px !important;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.2) !important;
+    overflow: hidden !important;
   }
 
-  elevenlabs-convai:hover {
-    opacity: 1;
-  }
-
-  /* Se quiser ocultar branding depois que o bot estiver visível, ative com cautela */
-  
-  elevenlabs-convai .branding,
-  elevenlabs-convai .powered-by {
+  /* Alvo seguro: sombra interna do widget que pode conter branding */
+  elevenlabs-convai::part(branding),
+  elevenlabs-convai::part(footer),
+  elevenlabs-convai::part(powered-by) {
     display: none !important;
     visibility: hidden !important;
+    height: 0 !important;
   }
+
+  /* Não use seletores genéricos como span ou a[href*] ou iframe global */
 </style>
+
+<script>
+  // Reforça a posição do widget após carregamento
+  window.addEventListener("load", () => {
+    const widget = document.querySelector("elevenlabs-convai");
+    if (widget) {
+      widget.style.position = "fixed";
+      widget.style.bottom = "20px";
+      widget.style.right = "20px";
+      widget.style.left = "auto";
+      widget.style.zIndex = "9999";
+    }
+  });
+</script>
+
 </html>
